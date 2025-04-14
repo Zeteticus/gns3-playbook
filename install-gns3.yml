@@ -48,10 +48,8 @@
           - dnf-plugins-core
           - git
           - wget
-          - nano
           - curl
           - openssl
-          - tigervnc
           - python3-devel
           - elfutils-libelf-devel
           - libpcap-devel
@@ -465,4 +463,3 @@
 
     - name: Reboot system if required
       reboot:
-      when: reboot_required.rc == 1 or selinux_config_check.rc != 0 or selinux_kernel_check.rc != 0
