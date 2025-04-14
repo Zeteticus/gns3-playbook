@@ -13,29 +13,6 @@
         state: latest
         update_cache: yes
 
-    - name: Check SELinux config state
-      command: grep "SELINUX=disabled" /etc/selinux/config
-      register: selinux_config_check
-      changed_when: false
-      failed_when: false
-
-    - name: Disable SELinux in config file
-      replace:
-        path: /etc/selinux/config
-        regexp: 'SELINUX=enforcing'
-        replace: 'SELINUX=disabled'
-      when: selinux_config_check.rc != 0
-
-    - name: Check kernel parameter for SELinux
-      shell: grubby --info=ALL | grep -q "selinux=0"
-      register: selinux_kernel_check
-      changed_when: false
-      failed_when: false
-
-    - name: Disable SELinux with kernel parameter
-      command: grubby --update-kernel ALL --args selinux=0
-      when: selinux_kernel_check.rc != 0
-
     - name: Check if GUI is installed
       shell: systemctl get-default
       register: default_target
