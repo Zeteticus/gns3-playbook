@@ -408,44 +408,6 @@
         state: enabled
       when: gns3_port_check.rc != 0
 
-#    - name: Install XRDP
-#      dnf:
-#        name: xrdp
-#        state: present
-#
-#    - name: Enable and start XRDP service
-#      systemd:
-#        name: xrdp
-#        state: started
-#        enabled: yes
-#
-#    - name: Check if XRDP port is open in firewall
-#      command: firewall-cmd --list-ports | grep -q "3389/tcp"
-#      register: xrdp_port_check
-#      changed_when: false
-#      failed_when: false
-#
-#    - name: Open XRDP port in firewall
-#      firewalld:
-#        port: 3389/tcp
-#        permanent: yes
-#        state: enabled
-#      when: xrdp_port_check.rc != 0
-#
-#    - name: Check if XRDP session is configured
-#      stat:
-#        path: "/home/{{ current_user }}/.xsession"
-#      register: xsession_file
-#
-#    - name: Configure XRDP session
-#      copy:
-#        content: "gnome-session"
-#        dest: "/home/{{ current_user }}/.xsession"
-#        owner: "{{ current_user }}"
-#        group: "{{ current_user }}"
-#        mode: '0644'
-#      when: not xsession_file.stat.exists
-
     - name: Check if firewall needs reload
       shell: echo $(($(firewall-cmd --permanent --get-zones | wc -w) + $(firewall-cmd --get-zones | wc -w)))
       register: firewall_zones
