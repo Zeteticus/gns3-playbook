@@ -1,7 +1,6 @@
 ######################################################################
 # This playbook will install the GNS3 server and GUI on a rhel9 system.
 # Mark Dotson, April 2025
-# Run as root
 #
 ######################################################################
 
